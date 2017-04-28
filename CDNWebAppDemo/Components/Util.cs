@@ -8,9 +8,25 @@ namespace CDNWebAppDemo.Components
 {
     public static class Util
     {
-        public static string GetCDNURL()
+        public enum CDNType
         {
-            return ConfigurationManager.AppSettings["CDNURL"];
+            AKAMAI,
+            VERIZONE,
+            LOCAL
+        }
+
+        public static string GetCDNURL(CDNType cdn)
+        {
+            switch (cdn)
+            {
+                case CDNType.AKAMAI:
+                    return ConfigurationManager.AppSettings["CDNURLAKAMAI"];
+                case CDNType.VERIZONE:
+                    return ConfigurationManager.AppSettings["CDNURLVERIZONE"];
+                case CDNType.LOCAL:
+                    return "";
+            }
+            return "";
         }
     }
 }

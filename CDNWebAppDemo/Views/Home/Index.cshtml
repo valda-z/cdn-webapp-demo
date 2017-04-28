@@ -1,21 +1,38 @@
 ﻿@using CDNWebAppDemo.Models
 @{
     ViewBag.Title = "Home Page";
+
+    CDNWebAppDemo.Components.Util.CDNType cdnT = CDNWebAppDemo.Components.Util.CDNType.LOCAL;
+
+    switch (Request.QueryString["cdn"])
+    {
+        case "AKAMAI":
+            cdnT = CDNWebAppDemo.Components.Util.CDNType.AKAMAI;
+            break;
+        case "VERIZONE":
+            cdnT = CDNWebAppDemo.Components.Util.CDNType.VERIZONE;
+            break;
+    }
 }
 
 <div class="jumbotron">
     <h1>CDN Demo</h1>
-    <p class="lead">Application setting uses these CDN: @CDNWebAppDemo.Components.Util.GetCDNURL()</p>
+    <p class="lead">Application setting uses these CDN URL: @CDNWebAppDemo.Components.Util.GetCDNURL(cdnT)</p>
+    <p class="lead">
+        <a type="button" class="btn @Html.Raw(cdnT==CDNWebAppDemo.Components.Util.CDNType.AKAMAI?"btn-primary":"btn-default")" href="?cdn=AKAMAI">Akamai</a>
+        <a type="button" class="btn @Html.Raw(cdnT==CDNWebAppDemo.Components.Util.CDNType.VERIZONE?"btn-primary":"btn-default")" href="?cdn=VERIZONE">Verizone</a>
+        <a type="button" class="btn @Html.Raw(cdnT==CDNWebAppDemo.Components.Util.CDNType.LOCAL?"btn-primary":"btn-default")" href="?cdn=LOCAL">LOCAL</a>
+    </p>
 </div>
 
 <div class="row">
     <div class="col-md-4">
-        @Html.Image(CDNWebAppDemo.Components.Util.GetCDNURL() + "/Images/pes1.jpg", "pes1", "300", "300")
+        @Html.Image(CDNWebAppDemo.Components.Util.GetCDNURL(cdnT) + "/Images/pes1.jpg", "pes1", "300", "300")
     </div>
     <div class="col-md-4">
-        @Html.Image(CDNWebAppDemo.Components.Util.GetCDNURL() + "/Images/pes2.jpg", "pes2", "300", "300")
+        @Html.Image(CDNWebAppDemo.Components.Util.GetCDNURL(cdnT) + "/Images/pes2.jpg", "pes2", "300", "300")
     </div>
     <div class="col-md-4">
-        @Html.Image(CDNWebAppDemo.Components.Util.GetCDNURL() + "/Images/pes3.jpg", "pes3", "300", "300")
+        @Html.Image(CDNWebAppDemo.Components.Util.GetCDNURL(cdnT) + "/Images/pes3.jpg", "pes3", "300", "300")
     </div>
 </div>
