@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Web;
 
@@ -9,7 +10,7 @@ namespace CDNWebAppDemo.Components
     {
         public static string GetCDNURL()
         {
-            return CDNWebAppDemo.Properties.Settings.Default.CDNURL;
+            return ConfigurationManager.AppSettings["CDNURL"];
         }
     }
 }
