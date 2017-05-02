@@ -15,18 +15,27 @@ namespace CDNWebAppDemo.Components
             LOCAL
         }
 
-        public static string GetCDNURL(CDNType cdn)
+        public static string GetCDNURL(CDNType cdn, bool isSSL)
         {
+            string cdnUrl = "";
             switch (cdn)
             {
                 case CDNType.AKAMAI:
-                    return ConfigurationManager.AppSettings["CDNURLAKAMAI"];
+                    cdnUrl = ConfigurationManager.AppSettings["CDNURLAKAMAI"];
+                    break;
                 case CDNType.VERIZONE:
-                    return ConfigurationManager.AppSettings["CDNURLVERIZONE"];
+                    cdnUrl = ConfigurationManager.AppSettings["CDNURLVERIZONE"];
+                    break;
                 case CDNType.LOCAL:
-                    return "";
+                    cdnUrl = "";
+                    break;
             }
-            return "";
+
+            if (isSSL)
+            {
+                cdnUrl = cdnUrl.Replace("http://", "https://");
+            }
+            return cdnUrl;
         }
     }
 }

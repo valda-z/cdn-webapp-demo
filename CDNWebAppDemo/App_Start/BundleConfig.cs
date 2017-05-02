@@ -11,27 +11,20 @@ namespace CDNWebAppDemo
         public static void RegisterBundles(BundleCollection bundles)
         {
             //enable CDN loading 
-            var cdnRoot = Util.GetCDNURL(Util.CDNType.VERIZONE);
+            var cdnRoot = Util.GetCDNURL(Util.CDNType.AKAMAI, true);
             var appVersion = Assembly.GetExecutingAssembly().GetName().Version.ToString();
             bundles.UseCdn = true;
 
             //### lets try for jquery bundle some FallBack action ...
-            var jqBundle = new ScriptBundle("~/bundles/jquery", string.Format("{0}/bundles/jquery?v={1}", cdnRoot, appVersion)).Include(
-                        "~/Scripts/jquery-{version}.js");
+            var jqBundle = new ScriptBundle("~/bundles/myappjs", string.Format("{0}/bundles/myappjs?v={1}", cdnRoot, appVersion)).Include(
+                          "~/Scripts/jquery-{version}.js",
+                          "~/Scripts/bootstrap.js",
+                          "~/Scripts/respond.js",
+                          "~/Scripts/jquery.validate*",
+                          "~/Scripts/modernizr-*"
+                      );
             jqBundle.CdnFallbackExpression = "window.jQuery";
             bundles.Add(jqBundle);
-
-            bundles.Add(new ScriptBundle("~/bundles/jqueryval", string.Format("{0}/bundles/jqueryval?v={1}", cdnRoot, appVersion)).Include(
-                        "~/Scripts/jquery.validate*"));
-
-            // Use the development version of Modernizr to develop with and learn from. Then, when you're
-            // ready for production, use the build tool at https://modernizr.com to pick only the tests you need.
-            bundles.Add(new ScriptBundle("~/bundles/modernizr", string.Format("{0}/bundles/modernizr?v={1}", cdnRoot, appVersion)).Include(
-                        "~/Scripts/modernizr-*"));
-
-            bundles.Add(new ScriptBundle("~/bundles/bootstrap", string.Format("{0}/bundles/bootstrap?v={1}", cdnRoot, appVersion)).Include(
-                      "~/Scripts/bootstrap.js",
-                      "~/Scripts/respond.js"));
 
             bundles.Add(new StyleBundle("~/Content/css", string.Format("{0}/Content/css?v={1}", cdnRoot, appVersion)).Include(
                       "~/Content/bootstrap.css",
