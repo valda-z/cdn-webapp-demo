@@ -18,12 +18,12 @@
 }
 
 <div class="jumbotron">
-    <h1>CDN Demo</h1>
+    <h3>CDN Demo</h3>
     <p class="lead">Application setting uses these CDN URL: @CDNWebAppDemo.Components.Util.GetCDNURL(cdnT, Request.IsSecureConnection)</p>
     <p class="lead">
-        <a type="button" class="btn @Html.Raw(cdnT==CDNWebAppDemo.Components.Util.CDNType.AKAMAI&&!isBP?"btn-primary":"btn-default")" href="?cdn=AKAMAI">Akamai</a>
-        <a type="button" class="btn @Html.Raw(cdnT==CDNWebAppDemo.Components.Util.CDNType.VERIZONE&&!isBP?"btn-primary":"btn-default")" href="?cdn=VERIZONE">Verizone</a>
-        <a type="button" class="btn @Html.Raw(cdnT==CDNWebAppDemo.Components.Util.CDNType.LOCAL&&!isBP?"btn-primary":"btn-default")" href="?cdn=LOCAL">LOCAL</a>
+        <a type="button" class="btn btn-lg @Html.Raw(cdnT==CDNWebAppDemo.Components.Util.CDNType.AKAMAI&&!isBP?"btn-primary":"btn-default")" href="?cdn=AKAMAI">Akamai</a>
+        <a type="button" class="btn btn-lg @Html.Raw(cdnT==CDNWebAppDemo.Components.Util.CDNType.VERIZONE&&!isBP?"btn-primary":"btn-default")" href="?cdn=VERIZONE">Verizone</a>
+        <a type="button" class="btn btn-lg @Html.Raw(cdnT==CDNWebAppDemo.Components.Util.CDNType.LOCAL&&!isBP?"btn-primary":"btn-default")" href="?cdn=LOCAL">LOCAL</a>
         <a type="button" class="btn @Html.Raw(cdnT==CDNWebAppDemo.Components.Util.CDNType.AKAMAI&&isBP?"btn-primary":"btn-default")" href="?cdn=AKAMAI&bp=true">Akamai + BIG PICTURE</a>
         <a type="button" class="btn @Html.Raw(cdnT==CDNWebAppDemo.Components.Util.CDNType.VERIZONE&&isBP?"btn-primary":"btn-default")" href="?cdn=VERIZONE&bp=true">Verizone + BIG PICTURE</a>
         <a type="button" class="btn @Html.Raw(cdnT==CDNWebAppDemo.Components.Util.CDNType.LOCAL&&isBP?"btn-primary":"btn-default")" href="?cdn=LOCAL&bp=true">LOCAL + BIG PICTURE</a>
@@ -31,14 +31,36 @@
 </div>
 
 <div class="row">
-    <div class="col-md-4">
-        @Html.Image(CDNWebAppDemo.Components.Util.GetCDNURL(cdnT, Request.IsSecureConnection) + "/Images/pes1.jpg", "pes1", "300", "300")
+    <div class="col-sm-6">
+        <div class="row">
+            <div class="col-md-6">
+                @Html.Image(CDNWebAppDemo.Components.Util.GetCDNURL(cdnT, Request.IsSecureConnection) + "/Images/pes1.jpg", "pes1", "200", "200")
+            </div>
+            <div class="col-md-6">
+                @Html.Image(CDNWebAppDemo.Components.Util.GetCDNURL(cdnT, Request.IsSecureConnection) + "/Images/pes2.jpg", "pes2", "200", "200")
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                @Html.Image(CDNWebAppDemo.Components.Util.GetCDNURL(cdnT, Request.IsSecureConnection) + "/Images/pes3.jpg", "pes1", "200", "200")
+            </div>
+            <div class="col-md-6">
+                @Html.Image(CDNWebAppDemo.Components.Util.GetCDNURL(cdnT, Request.IsSecureConnection) + "/Images/pes4.jpg", "pes2", "200", "200")
+            </div>
+        </div>
     </div>
-    <div class="col-md-4 ">
-        @Html.Image(CDNWebAppDemo.Components.Util.GetCDNURL(cdnT, Request.IsSecureConnection) + "/Images/pes2.jpg", "pes2", "300", "300")
-    </div>
-    <div class="col-md-4">
-        @Html.Image(CDNWebAppDemo.Components.Util.GetCDNURL(cdnT, Request.IsSecureConnection) + "/Images/pes3.jpg", "pes3", "300", "300")
+    <div class="col-sm-6">
+        <table border="0">
+            @for (int i = 0; i < 8; i++)
+            {
+                <tr>
+                    @for (int j = 0; j < 8; j++)
+                    {
+                        <td>@Html.Image(CDNWebAppDemo.Components.Util.GetCDNURL(cdnT, Request.IsSecureConnection) + string.Format("/Images/square/DSC_55421 [www.imagesplitter.net]-{0}-{1}.jpeg", i, j), "pes", "64", "")</td>
+                    }
+                </tr>
+            }
+        </table>
     </div>
 </div>
 
@@ -58,16 +80,4 @@
 </div>
 
 <hr />
-
-<table border="0">
-    @for (int i = 0; i < 8; i++)
-    {
-        <tr>
-            @for (int j = 0; j < 8; j++)
-            {
-                <td>@Html.Image(CDNWebAppDemo.Components.Util.GetCDNURL(cdnT, Request.IsSecureConnection) + string.Format("/Images/square/DSC_55421 [www.imagesplitter.net]-{0}-{1}.jpeg", i, j), "pes", "100", "")</td>
-            }
-        </tr>
-    }
-</table>
 
