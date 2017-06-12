@@ -18,15 +18,15 @@
 }
 
 <div class="jumbotron">
-    <h3>CDN Demo</h3>
-    <p class="lead">Application setting uses these CDN URL: @CDNWebAppDemo.Components.Util.GetCDNURL(cdnT, Request.IsSecureConnection)</p>
+    <h3>CDN Demo <span id="loadTimeID" class="label label-danger">load time</span></h3>
+    <p class="lead">Application setting uses these CDN URL: @CDNWebAppDemo.Components.Util.GetCDNURL(cdnT, Request.IsSecureConnection) </p>
     <p class="lead">
         <a type="button" class="btn btn-lg @Html.Raw(cdnT==CDNWebAppDemo.Components.Util.CDNType.AKAMAI&&!isBP?"btn-primary":"btn-default")" href="?cdn=AKAMAI">Akamai</a>
         <a type="button" class="btn btn-lg @Html.Raw(cdnT==CDNWebAppDemo.Components.Util.CDNType.VERIZONE&&!isBP?"btn-primary":"btn-default")" href="?cdn=VERIZONE">Verizone</a>
-        <a type="button" class="btn btn-lg @Html.Raw(cdnT==CDNWebAppDemo.Components.Util.CDNType.LOCAL&&!isBP?"btn-primary":"btn-default")" href="?cdn=LOCAL">LOCAL</a>
+        <a type="button" class="btn btn-lg @Html.Raw(cdnT==CDNWebAppDemo.Components.Util.CDNType.LOCAL&&!isBP?"btn-primary":"btn-default")" href="?cdn=LOCAL">WebApp</a>
         <a type="button" class="btn @Html.Raw(cdnT==CDNWebAppDemo.Components.Util.CDNType.AKAMAI&&isBP?"btn-primary":"btn-default")" href="?cdn=AKAMAI&bp=true">Akamai + BIG PICTURE</a>
         <a type="button" class="btn @Html.Raw(cdnT==CDNWebAppDemo.Components.Util.CDNType.VERIZONE&&isBP?"btn-primary":"btn-default")" href="?cdn=VERIZONE&bp=true">Verizone + BIG PICTURE</a>
-        <a type="button" class="btn @Html.Raw(cdnT==CDNWebAppDemo.Components.Util.CDNType.LOCAL&&isBP?"btn-primary":"btn-default")" href="?cdn=LOCAL&bp=true">LOCAL + BIG PICTURE</a>
+        <a type="button" class="btn @Html.Raw(cdnT==CDNWebAppDemo.Components.Util.CDNType.LOCAL&&isBP?"btn-primary":"btn-default")" href="?cdn=LOCAL&bp=true">WebApp + BIG PICTURE</a>
     </p>
 </div>
 
@@ -81,3 +81,9 @@
 
 <hr />
 
+<script language="javascript">
+    window.onload = function () {
+        var loadTime = window.performance.timing.domComplete - window.performance.timing.navigationStart;
+        $("#loadTimeID").text("Page load time: " + loadTime + " ms");
+    }
+</script>
